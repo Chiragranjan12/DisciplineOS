@@ -27,3 +27,7 @@ node_modules/
 .project
 .classpath
 .factorypath
+
+# Log files and build outputs
+*.log
+build_output.txt
