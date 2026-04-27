@@ -1,0 +1,29 @@
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+target/
+.next/
+dist/
+build/
+out/
+
+# Dependencies
+node_modules/
+
+# Local env files
+.env.local
+.env.*.local
+
+# Eclipse specific
+.settings/
+.project
+.classpath
+.factorypath

@@ -1,0 +1,122 @@
+================================================================
+  DISCIPLINE OS — HOW TO USE IT IN YOUR DAILY LIFE
+================================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STEP 1 — GETTING STARTED (ONE-TIME SETUP)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. REGISTER & LOG IN
+   Go to /register → create your account (name, email, password).
+   You will be logged in automatically.
+
+2. SET YOUR IDENTITY  →  /identity
+   This is the most important step.
+   Your Identity is the person you are actively becoming.
+
+   Examples:
+     - "High-Performance Software Engineer"
+     - "Disciplined Athlete & Entrepreneur"
+
+   Set:
+     - A clear TITLE     (who you're becoming)
+     - A DESCRIPTION     (what that looks like in practice)
+     - A TARGET DATE     (deadline to achieve it)
+
+   This identity becomes your north star.
+   Every task and habit you add should serve it.
+
+3. CREATE YOUR HABITS  →  /commitments
+   Add non-negotiable daily/weekly behaviors that define your identity.
+
+   Examples:
+     - Deep work session — 90 min  (Life Area: Skills)   — Daily
+     - Physical training            (Life Area: Health)   — Daily
+     - Financial review             (Life Area: Finance)  — Weekly
+
+   These repeat every day and build streaks over time.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STEP 2 — YOUR DAILY ROUTINE (DO THIS EVERY DAY)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+--- MORNING: Plan at /commitments ---
+
+  Add today's Tasks — the specific things you need to get done today.
+  For each task, set:
+    - Life Area  : Health / Skills / Career / Finance / Relationships / Mindset
+    - Priority   : High / Medium / Low
+    - Duration   : How many minutes you plan to spend
+
+  Aim for 3–5 focused tasks. Don't overplan.
+
+
+--- THROUGHOUT THE DAY: Check off on Dashboard (/) ---
+
+  The Dashboard is your command center. Here you can:
+    - Tap tasks to mark them complete
+    - See habit chips at the bottom (done vs. pending)
+    - Watch your Discipline Score update live
+
+  Your Discipline Score is calculated as:
+    - Tasks completed      →  40%
+    - Habits completed     →  30%
+    - Reflection done      →  20%
+    - Planning accuracy    →  10%
+
+
+--- EVENING: Reflect at /reflection ---
+
+  Before bed, answer 3 quick questions:
+    1. What went well today?
+    2. What distracted me?
+    3. Why did I miss things?
+       (choose: Distraction / Laziness / Fatigue / Overplanning / etc.)
+
+  Completing your reflection gives you +5 bonus points on your score
+  and unlocks the full analytics picture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  STEP 3 — WEEKLY REVIEW (ONCE A WEEK)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Open /analytics to see:
+    - 30-Day Discipline Index   — your structural average score
+    - 7-Day Trend               — are you going up or down?
+    - Weakest Life Area         — where you're consistently failing
+    - Top Failure Mode          — most common reason for breaking discipline
+
+  Use this to adjust next week's habits and task priorities.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  THE CORE DAILY LOOP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Set Identity → Add Habits → Plan Tasks → Execute → Reflect
+       ↑                                                  |
+       └──────────── Review Analytics weekly ────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SCORE TARGETS TO AIM FOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  85+       →  Elite       (exceptional consistency)
+  70–84     →  Strong      (on track, keep going)
+  55–69     →  Moderate    (room to tighten up)
+  40–54     →  Below Target (review your plan)
+  Below 40  →  Critical    (something needs to change)
+
+  If your score drops below 55 for three days in a row,
+  open /reflection and /analytics — something is off.
+
+
+================================================================
+  The whole idea is simple:
+  Every day, show up for your identity.
+  The score just makes it measurable.
+================================================================
