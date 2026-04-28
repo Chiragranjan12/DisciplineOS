@@ -20,8 +20,6 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ScoreServiceTest {
@@ -75,7 +73,6 @@ class ScoreServiceTest {
                 userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(testUser));
     }
 
     @Test
@@ -137,9 +134,9 @@ class ScoreServiceTest {
         // With reflection
         int scoreWithReflection = calculateScore(tasks, habits, weights, true, planningAccuracy);
 
-        // Assert: Reflection should add exactly +5 points
-        assertEquals(scoreWithReflection, scoreWithoutReflection + 5,
-                "Reflection bonus should add exactly +5 points");
+        // Assert: Reflection adds up to +5 points without exceeding the 100 cap
+        assertEquals(Math.min(100, scoreWithoutReflection + 5), scoreWithReflection,
+                "Reflection bonus should not push score above 100");
     }
 
     @Test
@@ -271,7 +268,7 @@ class ScoreServiceTest {
             }
         }
 
-        if (totalWeightedPotential == 0)
+        if (totalWeightedPotential == 0 || earnedWeightedPoints == 0)
             return 0;
 
         double productivityScore = (earnedWeightedPoints / totalWeightedPotential) * 100;
@@ -280,6 +277,7 @@ class ScoreServiceTest {
         if (reflectionCompleted)
             baseScore += 5; // Reflection bonus
 
-        return (int) Math.max(0, Math.min(100, Math.round(baseScore)));
+        int calculatedScore = (int) Math.round(baseScore);
+        return Math.max(0, Math.min(100, calculatedScore));
     }
 }

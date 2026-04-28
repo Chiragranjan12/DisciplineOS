@@ -131,7 +131,7 @@ public class ScoreService {
             }
         }
 
-        if (totalWeightedPotential == 0)
+        if (totalWeightedPotential == 0 || earnedWeightedPoints == 0)
             return new ScoreResult(0, 0);
 
         double productivityScore = (earnedWeightedPoints / totalWeightedPotential) * 100;
@@ -164,7 +164,8 @@ public class ScoreService {
         }
 
         double penaltyToApply = Math.min(rawPenalty, 25.0); // Capped at 25 points
-        int finalScore = (int) Math.max(0, Math.min(100, Math.round(baseScore - penaltyToApply)));
+        int calculatedScore = (int) Math.round(baseScore - penaltyToApply);
+        int finalScore = Math.max(0, Math.min(100, calculatedScore));
 
         return new ScoreResult(finalScore, penaltyToApply);
     }
