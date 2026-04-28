@@ -80,9 +80,9 @@ export default function DashboardPage() {
   const radarInterpretation = getRadarInterpretation(radarData || []);
 
   return (
-    <div className="max-w-[1280px] mx-auto space-y-6 animate-slide-up">
+    <div className="flex flex-col h-full w-full overflow-auto p-4">
       {/* Score Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
         {/* Discipline Score Card */}
         <Card className="md:col-span-1">
           <div className="flex items-start justify-between mb-2">
@@ -141,7 +141,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Weekly Trend Chart Card */}
-        <Card className="md:col-span-2">
+        <Card className="md:col-span-2 flex flex-col flex-1">
           <SectionHeader
             title="Narrative Summary"
             subtitle="Alignment with your core identity"
@@ -171,9 +171,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Middle Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
         {/* Life Area Radar */}
-        <Card>
+        <Card className="flex flex-col flex-1">
           <SectionHeader
             title="Area Distribution"
             subtitle="Structural effort realized vs identity intent"
@@ -195,7 +195,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Today's Top 3 Commitments */}
-        <Card>
+        <Card className="flex flex-col flex-1">
           <SectionHeader
             title="Top Focus"
             subtitle={`${completedCount} of ${(tasks || []).length} tasks complete`}

@@ -122,10 +122,9 @@ export default function IdentityPage() {
     );
 
     return (
-        <div className="max-w-[860px] mx-auto space-y-5 animate-slide-up">
-
+        <div className="flex flex-col h-full w-full p-6 gap-6">
             {/* ── Identity Statement Card ─────────────────────────────── */}
-            <Card>
+            <Card className="flex-1">
                 <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-4 flex-1 min-w-0">
                         <div className="w-10 h-10 bg-[#1F1A11] border border-[#8B7241]/30 rounded flex items-center justify-center shrink-0 mt-0.5">
@@ -202,7 +201,7 @@ export default function IdentityPage() {
             </Card>
 
             {/* ── Life Area Weights ────────────────────────────────────── */}
-            <Card>
+            <Card className="flex-1">
                 <SectionHeader
                     title="Life Area Priorities"
                     subtitle={isEditing ? "Drag each slider to set how much each area impacts your score" : "How much each area affects your Discipline Score"}

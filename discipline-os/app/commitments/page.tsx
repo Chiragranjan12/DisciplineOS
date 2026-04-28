@@ -93,7 +93,7 @@ export default function CommitmentsPage() {
     const scoreLabel = getScoreLabel(disciplineScore);
 
     return (
-        <div className="max-w-[1080px] mx-auto space-y-5 animate-slide-up">
+        <div className="flex flex-col h-full w-full">
             {/* Live Score Banner */}
             <div className="flex items-center gap-5 p-4 bg-[#18191C] border border-[#2A2D33] rounded">
                 <div className="flex items-center gap-2">
@@ -125,11 +125,11 @@ export default function CommitmentsPage() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
+            <div className="flex flex-1 gap-4 p-4 overflow-hidden">
                 {/* Tasks column */}
-                <div className="lg:col-span-3 space-y-4">
+                <div className="lg:col-span-3 space-y-4 flex flex-col flex-1 overflow-auto">
                     {/* Top 3 */}
-                    <Card>
+                    <Card className="flex flex-col flex-1 overflow-auto">
                         <SectionHeader
                             title="Top Priorities"
                             subtitle="High-impact commitments for today"
