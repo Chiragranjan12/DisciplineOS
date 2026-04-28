@@ -38,7 +38,3 @@ public class HabitController {
         return ResponseEntity.ok(service.toggleHabit(id));
     }
 }
-    public ResponseEntity<HabitDTO> toggleHabit(@PathVariable UUID id) {
-        return ResponseEntity.ok(service.toggleHabit(id));
-    }
-}

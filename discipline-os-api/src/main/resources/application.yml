@@ -3,8 +3,8 @@ spring:
     name: disciplineos-backend
   datasource:
     url: jdbc:postgresql://localhost:5432/disciplineos
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: postgres
+    password: Chir@gMishr@12
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

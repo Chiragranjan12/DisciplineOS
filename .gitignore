@@ -21,6 +21,7 @@ node_modules/
 # Local env files
 .env.local
 .env.*.local
+application-local.properties
 
 # Eclipse specific
 .settings/

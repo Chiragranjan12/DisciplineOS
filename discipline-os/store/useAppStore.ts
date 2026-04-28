@@ -91,9 +91,9 @@ export const useAppStore = create<AppState>((set, get) => {
         },
         identity: {
             id: "0",
-            title: "Loading...",
-            description: "Please wait...",
-            targetDate: new Date().toISOString().split('T')[0],
+            title: "",
+            description: "",
+            targetDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
             progressPercent: 0,
             linkedHabitIds: [],
             linkedTaskIds: [],

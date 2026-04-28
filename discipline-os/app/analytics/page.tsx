@@ -150,7 +150,13 @@ export default function AnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <Card>
                     <SectionHeader title="Life Area Performance" subtitle="Today's completion % per domain" />
-                    <LifeAreaBarChart data={radarData} />
+                    {radarData.length === 0 ? (
+                        <div className="py-8 text-center text-sm text-[#5C5A57]">
+                            Complete tasks today to see your life area breakdown
+                        </div>
+                    ) : (
+                        <LifeAreaBarChart data={radarData} />
+                    )}
                     {weakest && weakest.value < 60 && (
                         <div className="mt-4 flex items-start gap-2 p-3 bg-[#8B3A3A]/10 border border-[#8B3A3A]/20 rounded">
                             <AlertTriangle className="w-3.5 h-3.5 text-[#C97070] mt-0.5 shrink-0" />

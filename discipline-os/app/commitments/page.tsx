@@ -29,19 +29,14 @@ export default function CommitmentsPage() {
     const {
         tasks,
         habits,
-        reflection,
         disciplineScore,
         taskCompletionPercent,
         habitCompletionPercent,
-        reflectionCompleted,
         toggleTask,
         toggleHabit,
         fetchDailyLog,
         addTask,
         addHabit,
-        updateReflection,
-        setFailureReason,
-        saveReflection,
     } = useAppStore();
 
     const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -54,8 +49,6 @@ export default function CommitmentsPage() {
     const [newHabitLifeArea, setNewHabitLifeArea] = useState<string>("Health");
     const [newHabitFrequency, setNewHabitFrequency] = useState<string>("daily");
     const [showHabitForm, setShowHabitForm] = useState(false);
-
-    const [isSavingReflection, setIsSavingReflection] = useState(false);
 
     useEffect(() => {
         const today = new Date().toISOString().split('T')[0];
@@ -93,12 +86,6 @@ export default function CommitmentsPage() {
         setShowHabitForm(false);
     };
 
-    const handleSaveReflection = async () => {
-        setIsSavingReflection(true);
-        await saveReflection();
-        setIsSavingReflection(false);
-    };
-
     const top3 = tasks.filter((t) => t.priority === "high").slice(0, 3);
     const remaining = tasks.filter((t) => !top3.find((p) => p.id === t.id));
 
@@ -133,12 +120,6 @@ export default function CommitmentsPage() {
                         <div className="text-xs text-[#5C5A57]">Habits</div>
                         <div className="text-sm font-bold text-[#E8E6E1] tabular-nums">
                             {habitCompletionPercent}%
-                        </div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-xs text-[#5C5A57]">Log</div>
-                        <div className={`text-sm font-bold tabular-nums ${reflectionCompleted ? 'text-[#4A7C59]' : 'text-[#C97070]'}`}>
-                            {reflectionCompleted ? 'DONE' : 'PEND'}
                         </div>
                     </div>
                 </div>
@@ -329,59 +310,6 @@ export default function CommitmentsPage() {
                                 Add task
                             </button>
                         )}
-                    </Card>
-
-                    {/* Daily Reflection Form */}
-                    <Card className="bg-[#18191C] border-[#2A2D33]">
-                        <SectionHeader
-                            title="Daily Reflection"
-                            subtitle="Close the loop and analyze your patterns"
-                        />
-                        <div className="space-y-4">
-                            <div>
-                                <label className="block text-[10px] uppercase tracking-wider text-[#5C5A57] mb-1.5 ml-1">What went well?</label>
-                                <textarea
-                                    value={reflection.wentWell}
-                                    onChange={(e) => updateReflection("wentWell", e.target.value)}
-                                    placeholder="I successfully focused on my deep work block..."
-                                    className="w-full bg-[#111214] border border-[#2A2D33] rounded p-3 text-sm text-[#E8E6E1] focus:border-[#C6A75E] outline-none transition-colors min-h-[80px]"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-[10px] uppercase tracking-wider text-[#5C5A57] mb-1.5 ml-1">Critical Distractions</label>
-                                <textarea
-                                    value={reflection.distracted}
-                                    onChange={(e) => updateReflection("distracted", e.target.value)}
-                                    placeholder="Got distracted by social media for 20 mins..."
-                                    className="w-full bg-[#111214] border border-[#2A2D33] rounded p-3 text-sm text-[#E8E6E1] focus:border-[#C6A75E] outline-none transition-colors min-h-[80px]"
-                                />
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="flex-1">
-                                    <label className="block text-[10px] uppercase tracking-wider text-[#5C5A57] mb-1.5 ml-1">Failure Mode</label>
-                                    <select
-                                        className="w-full bg-[#111214] border border-[#2A2D33] rounded p-2 text-xs text-[#E8E6E1] focus:border-[#C6A75E] outline-none"
-                                        value={reflection.failureReason || ""}
-                                        onChange={(e) => setFailureReason((e.target.value as any) || null)}
-                                    >
-                                        <option value="">None / Success</option>
-                                        <option value="Distraction">Distraction</option>
-                                        <option value="Fatigue">Fatigue</option>
-                                        <option value="Laziness">Laziness</option>
-                                        <option value="Overplanning">Overplanning</option>
-                                        <option value="External Issue">External Issue</option>
-                                        <option value="Unclear Goal">Unclear Goal</option>
-                                    </select>
-                                </div>
-                                <button
-                                    onClick={handleSaveReflection}
-                                    disabled={isSavingReflection}
-                                    className="mt-5 px-6 py-2.5 bg-[#C6A75E] hover:bg-[#D4BC82] disabled:bg-[#3A3D43] text-[#111214] font-bold text-xs rounded transition-colors"
-                                >
-                                    {isSavingReflection ? "Saving..." : "Save Daily Log"}
-                                </button>
-                            </div>
-                        </div>
                     </Card>
                 </div>
 

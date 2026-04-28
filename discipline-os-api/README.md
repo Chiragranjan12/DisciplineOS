@@ -24,21 +24,16 @@ Core service for DisciplineOS — handles tasks, habits, scoring, and analytics.
    CREATE DATABASE disciplineos;
    ```
 
-3. **Confirm connection settings** in `src/main/resources/application.yml`:
-   ```yaml
-   spring:
-     datasource:
-       url: jdbc:postgresql://localhost:5432/disciplineos
-       username: postgres
-       password: Chir@gMishr@12
-   ```
+3. **Create local properties file** — create the file:
+   `discipline-os-api/src/main/resources/application-local.properties`
+   with your local credentials (see application-local.properties.example)
 
 ---
 
 ## Running the Server
 
 ```bash
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
 The server starts on **http://localhost:8080**.

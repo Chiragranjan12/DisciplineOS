@@ -158,12 +158,25 @@ export default function IdentityPage() {
                             </div>
                         ) : (
                             <div className="flex-1 min-w-0">
-                                <h2 className="text-xl font-bold text-[#E8E6E1] leading-snug">
-                                    {identity.title}
-                                </h2>
-                                <p className="text-sm text-[#9A9693] mt-2 leading-relaxed">
-                                    {identity.description}
-                                </p>
+                                {identity.title ? (
+                                    <>
+                                        <h2 className="text-xl font-bold text-[#E8E6E1] leading-snug">
+                                            {identity.title}
+                                        </h2>
+                                        <p className="text-sm text-[#9A9693] mt-2 leading-relaxed">
+                                            {identity.description}
+                                        </p>
+                                    </>
+                                ) : (
+                                    <div className="py-2">
+                                        <h2 className="text-lg font-medium text-[#5C5A57] leading-snug">
+                                            No identity set yet
+                                        </h2>
+                                        <p className="text-sm text-[#3A3D43] mt-1 leading-relaxed">
+                                            Click Edit to define who you want to become
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, Bell, LogOut } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
 
@@ -68,13 +68,6 @@ export function Header({ onMenuClick, isSidebarOpen }: HeaderProps) {
             <div className="flex items-center gap-4 shrink-0">
                 <span className="text-xs text-[#5C5A57] hidden md:block">{today}</span>
                 <div className="w-px h-4 bg-[#2A2D33] hidden md:block" />
-
-                <button
-                    className="text-[#5C5A57] hover:text-[#9A9693] transition-colors"
-                    title="Notifications"
-                >
-                    <Bell className="w-4 h-4" />
-                </button>
 
                 <button
                     onClick={handleLogout}

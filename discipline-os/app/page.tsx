@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { MetricDisplay } from "@/components/ui/MetricDisplay";
@@ -22,6 +23,7 @@ const lifeAreaColors: Record<LifeArea, string> = {
 };
 
 export default function DashboardPage() {
+  const router = useRouter();
   const {
     disciplineScore,
     taskCompletionPercent,
@@ -105,6 +107,12 @@ export default function DashboardPage() {
             </span>
             <span className="text-xs text-[#5C5A57] uppercase tracking-wider font-bold mb-2">Structural</span>
           </div>
+
+          {tasks.length === 0 && habits.length === 0 && (
+            <div className="mt-3 text-xs text-[#5C5A57] italic">
+              Add tasks and habits to start tracking your score
+            </div>
+          )}
 
           <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[#1E2024]">
             <span className="text-[10px] uppercase text-[#5C5A57] font-semibold tracking-widest">Daily Reading:</span>
@@ -199,45 +207,57 @@ export default function DashboardPage() {
           />
 
           <div className="space-y-2 mb-6">
-            {top3.map((task) => (
-              <button
-                key={task.id}
-                onClick={() => toggleTask(task.id)}
-                className="w-full flex items-start gap-3 p-3 rounded border border-transparent hover:border-[#2A2D33] hover:bg-[#18191C] transition-colors duration-150 text-left group"
-              >
-                <div className="mt-0.5 shrink-0">
-                  {task.completed ? (
-                    <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
-                  ) : (
-                    <Circle className="w-4 h-4 text-[#3A3D43] group-hover:text-[#5C5A57]" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div
-                    className={`text-sm font-medium leading-snug ${task.completed
-                      ? "line-through text-[#5C5A57]"
-                      : "text-[#E8E6E1]"
-                      }`}
-                  >
-                    {task.title}
+            {tasks.length === 0 ? (
+              <div className="text-center py-6">
+                <p className="text-xs text-[#5C5A57] mb-3">No tasks yet — go to Commitments to plan your day</p>
+                <button
+                  onClick={() => router.push('/commitments')}
+                  className="text-xs text-[#C6A75E] hover:text-[#D4BC82] underline"
+                >
+                  Go to Commitments
+                </button>
+              </div>
+            ) : (
+              top3.map((task) => (
+                <button
+                  key={task.id}
+                  onClick={() => toggleTask(task.id)}
+                  className="w-full flex items-start gap-3 p-3 rounded border border-transparent hover:border-[#2A2D33] hover:bg-[#18191C] transition-colors duration-150 text-left group"
+                >
+                  <div className="mt-0.5 shrink-0">
+                    {task.completed ? (
+                      <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
+                    ) : (
+                      <Circle className="w-4 h-4 text-[#3A3D43] group-hover:text-[#5C5A57]" />
+                    )}
                   </div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span
-                      className="text-[10px] font-medium px-1.5 py-0.5 rounded"
-                      style={{
-                        color: lifeAreaColors[task.lifeArea as LifeArea] || "#5C5A57",
-                        backgroundColor: `${lifeAreaColors[task.lifeArea as LifeArea] || "#5C5A57"}18`,
-                      }}
+                  <div className="flex-1 min-w-0">
+                    <div
+                      className={`text-sm font-medium leading-snug ${task.completed
+                        ? "line-through text-[#5C5A57]"
+                        : "text-[#E8E6E1]"
+                        }`}
                     >
-                      {task.lifeArea}
-                    </span>
-                    <span className="text-[10px] text-[#3A3D43]">
-                      {task.plannedDurationMinutes}m planned
-                    </span>
+                      {task.title}
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span
+                        className="text-[10px] font-medium px-1.5 py-0.5 rounded"
+                        style={{
+                          color: lifeAreaColors[task.lifeArea as LifeArea] || "#5C5A57",
+                          backgroundColor: `${lifeAreaColors[task.lifeArea as LifeArea] || "#5C5A57"}18`,
+                        }}
+                      >
+                        {task.lifeArea}
+                      </span>
+                      <span className="text-[10px] text-[#3A3D43]">
+                        {task.plannedDurationMinutes}m planned
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              ))
+            )}
           </div>
 
           {/* Habits quick view */}
@@ -245,22 +265,31 @@ export default function DashboardPage() {
             <div className="text-[10px] uppercase tracking-widest text-[#5C5A57] mb-3">
               Daily Habits
             </div>
-            <div className="flex flex-wrap gap-2">
-              {habits.map((h) => (
-                <div
-                  key={h.id}
-                  className={`text-xs px-2.5 py-1 rounded border ${h.completedToday
-                    ? "border-[#4A7C59]/40 bg-[#4A7C59]/10 text-[#4A7C59]"
-                    : "border-[#2A2D33] text-[#5C5A57]"
-                    }`}
+            {habits.length === 0 ? (
+              <div className="text-center py-4">
+                <p className="text-xs text-[#5C5A57] mb-3">No active habits — add habits in Commitments to start building streaks</p>
+                <button
+                  onClick={() => router.push('/commitments')}
+                  className="text-xs text-[#C6A75E] hover:text-[#D4BC82] underline"
                 >
-                  {h.title}
-                </div>
-              ))}
-              {habits.length === 0 && (
-                <div className="text-xs text-[#3A3D43] italic">No active habits</div>
-              )}
-            </div>
+                  Go to Commitments
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {habits.map((h) => (
+                  <div
+                    key={h.id}
+                    className={`text-xs px-2.5 py-1 rounded border ${h.completedToday
+                      ? "border-[#4A7C59]/40 bg-[#4A7C59]/10 text-[#4A7C59]"
+                      : "border-[#2A2D33] text-[#5C5A57]"
+                      }`}
+                  >
+                    {h.title}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </Card>
       </div>
