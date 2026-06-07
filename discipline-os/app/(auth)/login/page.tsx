@@ -74,13 +74,13 @@ export default function LoginPage() {
                 {/* Card */}
                 <div className="bg-[#16181C] border border-[#2A2D33] rounded-xl p-8 shadow-[0_0_40px_rgba(0,0,0,0.4)]">
                     <h2 className="text-lg font-bold text-[#E8E6E1] mb-1">Welcome back</h2>
-                    <p className="text-xs text-[#5C5A57] mb-6">Sign in to continue your discipline streak</p>
+                    <p className="text-xs text-[#8A8784] mb-6">Sign in to continue your discipline streak</p>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
 
                         {/* Email Field */}
                         <div className="space-y-1.5">
-                            <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">
+                            <label className="text-[11px] uppercase tracking-wider text-[#8A8784] font-bold">
                                 Email Address
                             </label>
                             <div className="relative">
@@ -89,7 +89,7 @@ export default function LoginPage() {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded-lg pl-10 pr-4 py-3 text-sm text-[#E8E6E1] placeholder-[#3A3D43] focus:outline-none focus:border-[#C6A75E] focus:bg-[#1E2024] transition-all"
+                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded-lg pl-10 pr-4 py-3.5 text-sm text-[#E8E6E1] placeholder-[#3A3D43] focus:outline-none focus:border-[#C6A75E] focus:bg-[#1E2024] transition-all"
                                     placeholder="name@example.com"
                                     required
                                 />
@@ -99,15 +99,10 @@ export default function LoginPage() {
                         {/* Password Field */}
                         <div className="space-y-1.5">
                             <div className="flex items-center justify-between">
-                                <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">
+                                <label className="text-[11px] uppercase tracking-wider text-[#8A8784] font-bold">
                                     Password
                                 </label>
-                                <button
-                                    type="button"
-                                    className="text-[11px] text-[#C6A75E] hover:text-[#D4B86A] transition-colors"
-                                >
-                                    Forgot password?
-                                </button>
+
                             </div>
                             <div className="relative">
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3A3D43]" />
@@ -115,14 +110,14 @@ export default function LoginPage() {
                                     type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded-lg pl-10 pr-10 py-3 text-sm text-[#E8E6E1] placeholder-[#3A3D43] focus:outline-none focus:border-[#C6A75E] transition-all"
+                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded-lg pl-10 pr-12 py-3.5 text-sm text-[#E8E6E1] placeholder-[#3A3D43] focus:outline-none focus:border-[#C6A75E] transition-all"
                                     placeholder="••••••••"
                                     required
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#3A3D43] hover:text-[#C6A75E] transition-colors"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-[#3A3D43] hover:text-[#C6A75E] transition-colors"
                                 >
                                     {showPassword
                                         ? <EyeOff className="w-4 h-4" />

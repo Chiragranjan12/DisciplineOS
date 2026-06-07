@@ -5,12 +5,14 @@ import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { MetricDisplay } from "@/components/ui/MetricDisplay";
-import {
-    WeeklyBarChart,
-    RollingTrendChart,
-    FailureReasonsChart,
-    LifeAreaBarChart,
-} from "@/components/features/charts/AnalyticsCharts";
+import dynamic from "next/dynamic";
+
+const { WeeklyBarChart, RollingTrendChart, FailureReasonsChart, LifeAreaBarChart } = {
+    WeeklyBarChart: dynamic(() => import("@/components/features/charts/AnalyticsCharts").then(m => m.WeeklyBarChart), { ssr: false }),
+    RollingTrendChart: dynamic(() => import("@/components/features/charts/AnalyticsCharts").then(m => m.RollingTrendChart), { ssr: false }),
+    FailureReasonsChart: dynamic(() => import("@/components/features/charts/AnalyticsCharts").then(m => m.FailureReasonsChart), { ssr: false }),
+    LifeAreaBarChart: dynamic(() => import("@/components/features/charts/AnalyticsCharts").then(m => m.LifeAreaBarChart), { ssr: false }),
+};
 import { getRollingAverage, getScoreColor, getScoreLabel } from "@/lib/scoreUtils";
 import { AlertTriangle, TrendingUp, TrendingDown, Minus } from "lucide-react";
 

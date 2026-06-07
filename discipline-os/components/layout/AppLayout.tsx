@@ -41,7 +41,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 
     // If it's an auth route, don't show the sidebar/header
     if (isAuthRoute) {
-        return <>{children}</>;
+        return <main>{children}</main>;
     }
 
     return (
