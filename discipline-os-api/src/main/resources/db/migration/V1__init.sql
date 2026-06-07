@@ -114,7 +114,7 @@ CREATE INDEX idx_tasks_user ON tasks(user_id);
 CREATE INDEX idx_habits_user ON habits(user_id);
 CREATE INDEX idx_daily_scores_user_date ON daily_scores(user_id, date);
 CREATE INDEX idx_reflections_user_date ON reflections(user_id, date);
-CREATE INDEX idx_users_email ON users(email) UNIQUE;
+CREATE UNIQUE INDEX idx_users_email ON users(email);
 
 -- Insert default role
 INSERT INTO roles (id, name) VALUES ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'ROLE_USER') ON CONFLICT (name) DO NOTHING;
