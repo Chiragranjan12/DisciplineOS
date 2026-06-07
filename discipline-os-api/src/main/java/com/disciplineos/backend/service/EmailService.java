@@ -41,7 +41,6 @@ public class EmailService {
             mailSender.send(message);
         } catch (MailException ex) {
             log.error("Failed to send registration OTP to {}", email, ex);
-            throw ex;
         }
     }
 }

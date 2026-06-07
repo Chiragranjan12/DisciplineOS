@@ -128,12 +128,13 @@ public class AuthService {
     }
 
     public AuthResponseDTO login(AuthRequestDTO request) {
+        String normalizedEmail = normalizeEmail(request.getEmail());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        normalizedEmail,
                         request.getPassword()));
 
-        User user = userRepository.findByEmail(request.getEmail())
+        User user = userRepository.findByEmail(normalizedEmail)
                 .orElseThrow();
 
         String jwtToken = jwtService.generateToken(user);
