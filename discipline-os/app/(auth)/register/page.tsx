@@ -15,9 +15,6 @@ export default function RegisterPage() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [otp, setOtp] = useState("");
-    const [step, setStep] = useState<"details" | "otp">("details");
-    const [notice, setNotice] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -25,31 +22,14 @@ export default function RegisterPage() {
         e.preventDefault();
         setIsLoading(true);
         setError(null);
-        setNotice(null);
 
         try {
             const response = await apiClient.post("/auth/register", { name, email, password });
-            setNotice(response.data?.message || "Verification code sent to your email.");
-            setStep("otp");
-        } catch (err: any) {
-            setError(err.response?.data?.message || err.response?.data?.error || "Failed to create account. Please try again.");
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleVerifyOtp = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setError(null);
-
-        try {
-            const response = await apiClient.post("/auth/verify-email", { email, otp });
-            const { token, name: verifiedName, email: verifiedEmail } = response.data;
-            setAuth({ id: "", name: verifiedName, email: verifiedEmail }, token);
+            const { token, name: userName, email: userEmail } = response.data;
+            setAuth({ id: "", name: userName, email: userEmail }, token);
             router.push("/");
         } catch (err: any) {
-            setError(err.response?.data?.message || err.response?.data?.error || "Invalid verification code. Please try again.");
+            setError(err.response?.data?.message || err.response?.data?.error || "Failed to create account. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -69,118 +49,62 @@ export default function RegisterPage() {
                 </div>
 
                 <Card className="p-8">
-                    <h2 className="text-xl font-bold text-[#E8E6E1] mb-6">
-                        {step === "details" ? "Create your ID" : "Verify your email"}
-                    </h2>
+                    <h2 className="text-xl font-bold text-[#E8E6E1] mb-6">Create your ID</h2>
 
-                    {step === "details" ? (
-                        <form onSubmit={handleRegister} className="space-y-4">
-                            <div className="space-y-1.5">
-                                <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">Full Name</label>
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded px-4 py-2.5 text-sm text-[#E8E6E1] focus:outline-none focus:border-[#C6A75E] transition-colors"
-                                    placeholder="Marcus Cole"
-                                    required
-                                />
+                    <form onSubmit={handleRegister} className="space-y-4">
+                        <div className="space-y-1.5">
+                            <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">Full Name</label>
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="w-full bg-[#1E2024] border border-[#2A2D33] rounded px-4 py-2.5 text-sm text-[#E8E6E1] focus:outline-none focus:border-[#C6A75E] transition-colors"
+                                placeholder="Marcus Cole"
+                                required
+                            />
+                        </div>
+
+                        <div className="space-y-1.5">
+                            <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">Email Address</label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-[#1E2024] border border-[#2A2D33] rounded px-4 py-2.5 text-sm text-[#E8E6E1] focus:outline-none focus:border-[#C6A75E] transition-colors"
+                                placeholder="name@example.com"
+                                required
+                            />
+                        </div>
+
+                        <div className="space-y-1.5">
+                            <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">Password</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full bg-[#1E2024] border border-[#2A2D33] rounded px-4 py-2.5 text-sm text-[#E8E6E1] focus:outline-none focus:border-[#C6A75E] transition-colors"
+                                placeholder="Password"
+                                required
+                            />
+                        </div>
+
+                        {error && (
+                            <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400 text-xs animate-shake">
+                                <AlertCircle className="w-4 h-4 shrink-0" />
+                                <span>{error}</span>
                             </div>
+                        )}
 
-                            <div className="space-y-1.5">
-                                <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">Email Address</label>
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded px-4 py-2.5 text-sm text-[#E8E6E1] focus:outline-none focus:border-[#C6A75E] transition-colors"
-                                    placeholder="name@example.com"
-                                    required
-                                />
-                            </div>
-
-                            <div className="space-y-1.5">
-                                <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">Password</label>
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded px-4 py-2.5 text-sm text-[#E8E6E1] focus:outline-none focus:border-[#C6A75E] transition-colors"
-                                    placeholder="Password"
-                                    required
-                                />
-                            </div>
-
-                            {error && (
-                                <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400 text-xs animate-shake">
-                                    <AlertCircle className="w-4 h-4 shrink-0" />
-                                    <span>{error}</span>
-                                </div>
+                        <Button type="submit" className="w-full mt-2" disabled={isLoading}>
+                            {isLoading ? (
+                                <span className="flex items-center gap-2">
+                                    <Loader2 className="w-4 h-4 animate-spin" /> Creating account...
+                                </span>
+                            ) : (
+                                "Create Account"
                             )}
-
-                            <Button type="submit" className="w-full mt-2" disabled={isLoading}>
-                                {isLoading ? (
-                                    <span className="flex items-center gap-2">
-                                        <Loader2 className="w-4 h-4 animate-spin" /> Sending code...
-                                    </span>
-                                ) : (
-                                    "Send Verification Code"
-                                )}
-                            </Button>
-                        </form>
-                    ) : (
-                        <form onSubmit={handleVerifyOtp} className="space-y-4">
-                            {notice && (
-                                <div className="p-3 bg-[#C6A75E]/10 border border-[#C6A75E]/20 rounded text-[#C6A75E] text-xs">
-                                    {notice}
-                                </div>
-                            )}
-
-                            <div className="space-y-1.5">
-                                <label className="text-[11px] uppercase tracking-wider text-[#5C5A57] font-bold">6-Digit Code</label>
-                                <input
-                                    type="text"
-                                    value={otp}
-                                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                                    className="w-full bg-[#1E2024] border border-[#2A2D33] rounded px-4 py-3 text-center text-lg tracking-[0.35em] text-[#E8E6E1] focus:outline-none focus:border-[#C6A75E] transition-colors"
-                                    placeholder="000000"
-                                    inputMode="numeric"
-                                    pattern="\d{6}"
-                                    required
-                                />
-                            </div>
-
-                            {error && (
-                                <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400 text-xs animate-shake">
-                                    <AlertCircle className="w-4 h-4 shrink-0" />
-                                    <span>{error}</span>
-                                </div>
-                            )}
-
-                            <Button type="submit" className="w-full mt-2" disabled={isLoading || otp.length !== 6}>
-                                {isLoading ? (
-                                    <span className="flex items-center gap-2">
-                                        <Loader2 className="w-4 h-4 animate-spin" /> Verifying...
-                                    </span>
-                                ) : (
-                                    "Verify Email"
-                                )}
-                            </Button>
-
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setStep("details");
-                                    setOtp("");
-                                    setError(null);
-                                    setNotice(null);
-                                }}
-                                className="w-full text-xs text-[#5C5A57] hover:text-[#C6A75E] transition-colors"
-                            >
-                                Change registration details
-                            </button>
-                        </form>
-                    )}
+                        </Button>
+                    </form>
                 </Card>
 
                 <p className="text-center text-xs text-[#5C5A57]">
