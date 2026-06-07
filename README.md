@@ -53,7 +53,7 @@ DB_URL=jdbc:postgresql://localhost:5432/disciplineos
 DB_USERNAME=postgres
 DB_PASSWORD=your_postgres_password
 JWT_SECRET=your_base64_encoded_secret_key_here_at_least_256_bits
-NEXT_PUBLIC_API_URL=http://localhost:8080
+NEXT_PUBLIC_API_URL=http://localhost:8080/api/v1
 ```
 
 ### Run the Backend

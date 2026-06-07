@@ -2,6 +2,7 @@ package com.disciplineos.backend.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -44,6 +45,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> handleBadCredentialsException(BadCredentialsException ex, WebRequest request) {
         return buildErrorResponse("Invalid email or password", HttpStatus.UNAUTHORIZED, request);
+    }
+
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<?> handleDisabledException(DisabledException ex, WebRequest request) {
+        return buildErrorResponse("Please verify your email before logging in", HttpStatus.UNAUTHORIZED, request);
+    }
+
+    @ExceptionHandler(InvalidOtpException.class)
+    public ResponseEntity<?> handleInvalidOtpException(InvalidOtpException ex, WebRequest request) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(Exception.class)

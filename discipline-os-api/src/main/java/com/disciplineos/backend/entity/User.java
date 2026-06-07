@@ -30,6 +30,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Builder.Default
+    @Column(nullable = false)
+    private boolean emailVerified = false;
+
+    private String verificationOtpHash;
+    private LocalDateTime verificationOtpExpiresAt;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
@@ -84,6 +91,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return emailVerified;
     }
 }

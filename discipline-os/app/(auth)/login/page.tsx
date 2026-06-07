@@ -28,9 +28,16 @@ export default function LoginPage() {
             setAuth(user, token);
             router.push("/");
         } catch (err: any) {
+            const data = err.response?.data;
+
+            if (data?.requiresVerification && data?.email) {
+                router.push(`/verify-email?email=${encodeURIComponent(data.email)}`);
+                return;
+            }
+
             setError(
-                err.response?.data?.message ||
-                err.response?.data?.error ||
+                data?.message ||
+                data?.error ||
                 "Failed to log in. Please check your credentials."
             );
         } finally {
@@ -47,7 +54,7 @@ export default function LoginPage() {
             <div className="relative w-full max-w-[420px] space-y-6">
 
                 {/* Logo + Branding */}
-                <div className="flex flex-col items-center gap-3 mb-2">
+                <div className="flex flex-col items-center gap-3 mb-8">
                     <div className="w-14 h-14 bg-[#C6A75E] rounded-lg flex items-center justify-center shadow-[0_0_30px_rgba(198,167,94,0.3)]">
                         <Zap className="w-8 h-8 text-[#0E1012]" strokeWidth={2.5} />
                     </div>

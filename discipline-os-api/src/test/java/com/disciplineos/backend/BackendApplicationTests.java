@@ -10,6 +10,7 @@ import com.disciplineos.backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -38,6 +39,9 @@ class BackendApplicationTests {
 
     @MockBean
     private DailyScoreRepository dailyScoreRepository;
+
+    @MockBean
+    private JavaMailSender javaMailSender;
 
     @Test
     void contextLoads() {
