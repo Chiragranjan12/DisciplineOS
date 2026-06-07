@@ -1,7 +1,7 @@
 package com.disciplineos.backend.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -9,11 +9,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class EmailService {
 
-    private final JavaMailSender mailSender;
+    @Autowired(required = false)
+    private JavaMailSender mailSender;
 
     @Value("${application.mail.enabled:false}")
     private boolean mailEnabled;
@@ -22,7 +22,7 @@ public class EmailService {
     private String fromAddress;
 
     public void sendRegistrationOtp(String email, String otp) {
-        if (!mailEnabled) {
+        if (!mailEnabled || mailSender == null) {
             log.info("Email sending is disabled. Registration OTP for {} is {}", email, otp);
             return;
         }
